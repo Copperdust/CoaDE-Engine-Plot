@@ -1,0 +1,26 @@
+{
+  "name": "stockengines",
+  "version": "1.0.0",
+  "description": "Public plotted repository for engines for CoaDE",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Copperdust/CoaDE-Engine-Plot.git"
+  },
+  "author": "Tessfield",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Copperdust/CoaDE-Engine-Plot/issues"
+  },
+  "homepage": "https://github.com/Copperdust/CoaDE-Engine-Plot#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.0",
+    "gulp-watch": "^4.3.11",
+    "less-plugin-autoprefix": "^1.5.1",
+    "path": "^0.12.7"
+  }
+}

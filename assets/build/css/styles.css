@@ -1,0 +1,19 @@
+body {
+  background-color: blue !important;
+}
+.mjx-chtml {
+  font-size: 22px !important;
+}
+.equations-container {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.equations-container > span {
+  padding: 10px;
+  border: 3px double black;
+  margin: 10px;
+  border-radius: 1px;
+}
