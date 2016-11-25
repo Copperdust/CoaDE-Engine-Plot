@@ -4,7 +4,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js" integrity="sha256-1qeNeAAFNi/g6PFChfXQfa6CQ8eXoHXreohinZsoJOQ=" crossorigin="anonymous"></script>
   <script src="./rcolor.js"></script>
   <script src="./engines.js"></script>
-  <title>Engine Plot</title>
+  <script src="./stockEngines.js"></script>
+  <title>NTR Engine Plot</title>
 </head>
 <style type="text/css">
 
@@ -16,26 +17,42 @@
 var ctx = document.getElementById("engineChart");
 
 var color = new RColor;
-var radj = 0.1; // Volume, in m3
-var xadj = 0.000001; // Thrust, in MegaNewtons
+var radj = 100000; // Volume, in m3
+var xadj = 1; // Thrust, in MegaNewtons
 var yadj = 0.001; // Weight, in Tonnes
 
-var data = {datasets: [
-  ]};
+var data = {datasets: []};
+
+var addEngine = function( data ) {
+  var radius = Math.PI * data.diameter / 2 * data.height * 0.1;
+  radius = Math.pow( radius, 0.5 ) * 10;
+  console.log(
+    Math.PI * data.diameter / 2 * data.height,
+    radius
+  );
+  window.data.datasets.push({
+    label: data.label,
+    data: [{
+      x: data.thrust / data.weight * xadj,
+      y: data.thrust * yadj,
+      r: radius,
+    }],
+    backgroundColor: data.color,
+    borderColor: 'black',
+    borderWidth: Math.pow( Math.max( data.cost / 100000, 0.5 ), 0.5 ),
+  });
+}
 
 for (var i = engines.length - 1; i >= 0; i--) {
   var curr = engines[i];
-  if ( typeof curr.color != undefined ) curr.color = color.get(true);
-  var engine = {
-    label: curr.label,
-    data: [{
-      x: curr.thrust * xadj,
-      y: curr.weight * yadj,
-      r: Math.PI * curr.diameter / 2 * curr.height * radj
-    }],
-    backgroundColor: curr.color
-  };
-  data.datasets.push( engine );
+  if ( typeof curr.color != undefined ) curr.color = color.get(true, 0.9, 0.85);
+  addEngine( curr );
+}
+
+for (var i = stockEngines.length - 1; i >= 0; i--) {
+  var curr = stockEngines[i];
+  if ( typeof curr.color != undefined ) curr.color = color.get(true, 0.10, 0.85);
+  addEngine( curr );
 }
 
 var options = {
@@ -47,6 +64,29 @@ var options = {
     fontSize: 32,
     padding: 20,
     text: "CoaDE Engine Plot",
+  },
+  scales: {
+    xAxes: [{
+      ticks: {
+        max: 4000,
+        callback: function( value ) {
+          return value + ' g0 ';
+        }
+      }
+    }],
+    yAxes: [{
+      type: 'logarithmic',
+      ticks: {
+        min: 500,
+        callback: function( value ) {
+          if ( value < 9900 ) {
+            return value + ' KN';
+          } else {
+            return value / 1000 + ' MN';
+          }
+        }
+      }
+    }]
   },
 };
 

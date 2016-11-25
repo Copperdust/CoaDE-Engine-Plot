@@ -1,5 +1,6 @@
 // Free to use & distribute under the MIT license
 // Wes Johnson (@SterlingWes)
+// Git Repo: https://github.com/sterlingwes/RandomColor
 //
 // inspired by http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/
 
@@ -38,12 +39,12 @@
         }
         return [Math.floor(r*256),Math.floor(g*256),Math.floor(b*256)];
     };
-    
+
     RColor.prototype.padHex = function(str) {
         if(str.length > this.hexwidth) return str;
         return new Array(this.hexwidth - str.length + 1).join('0') + str;
     };
-    
+
     RColor.prototype.get = function(hex,saturation,value) {
         this.hue += this.goldenRatio;
         this.hue %= 1;
@@ -54,7 +55,7 @@
             return "#" +  this.padHex(rgb[0].toString(16))
                         + this.padHex(rgb[1].toString(16))
                         + this.padHex(rgb[2].toString(16));
-        else 
+        else
             return rgb;
     };
 
