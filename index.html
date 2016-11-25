@@ -1,45 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- This script takes care of rendering the chart -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js" integrity="sha256-1qeNeAAFNi/g6PFChfXQfa6CQ8eXoHXreohinZsoJOQ=" crossorigin="anonymous"></script>
+
+  <!-- This script takes care of allowing us to write math stuffs -->
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- This script allows us to get a random color with ease -->
   <script src="./rcolor.js"></script>
+
+  <!-- These are our own scripts, which allow us to organize our project and improve readability and maintainability -->
   <script src="./engines.js"></script>
   <script src="./stockEngines.js"></script>
   <title>NTR Engine Plot</title>
 </head>
 <style type="text/css">
-
+  .mjx-chtml{
+    font-size: 22px !important;
+  }
+  .equations-container{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+  }
+  .equations-container > span {
+    padding: 10px;
+    border: 3px double black;
+    margin: 10px;
+    border-radius: 1px;
+  }
 </style>
 <body>
-  <canvas id="engineChart" width="400" height="400"></canvas>
+  <div class="data-container">
+    <h2>Big Engines</h2>
+    <div class="equations-container">
+      <span>\( \frac{radius (px)}{1}\ = \sqrt{ \frac{\pi \cdot diameter \cdot height}{2}\ } \)</span>
+      <span>\( \frac{border (px)}{1}\ = \max{( \sqrt{\frac{cost (c)}{1000}}, 0.5)} \)</span>
+    </div>
+    <canvas id="engineChart0" width="400" height="400"></canvas>
+  </div>
+  <hr>
+  <div class="data-container">
+    <h2>Small Engines</h2>
+    <div class="equations-container">
+      <span>\( \frac{radius (px)}{2}\ = \sqrt{ \frac{\pi \cdot diameter \cdot height}{2}\ } \)</span>
+      <span>\( \frac{border (px)}{2}\ = \max{( \sqrt{\frac{cost (c)}{1000}}, 0.5)} \)</span>
+    </div>
+    <canvas id="engineChart1" width="400" height="400"></canvas>
+  </div>
+  <hr>
+  <div class="data-container">
+    <h2>Tiny Engines</h2>
+    <div class="equations-container">
+      <span>\( \frac{radius (px)}{10}\ = \sqrt{ \frac{\pi \cdot diameter \cdot height}{2}\ } \)</span>
+      <span>\( \frac{border (px)}{10}\ = \max{( \sqrt{\frac{cost (c)}{1000}}, 0.5)} \)</span>
+    </div>
+    <canvas id="engineChart2" width="400" height="400"></canvas>
+  </div>
   <script>
-
-var ctx = document.getElementById("engineChart");
 
 var color = new RColor;
 var radj = 100000; // Volume, in m3
-var xadj = 1; // Thrust, in MegaNewtons
 var yadj = 0.001; // Weight, in Tonnes
 
-var data = {datasets: []};
+var data0 = {datasets: []};
+var data1 = {datasets: []};
+var data2 = {datasets: []};
+
+window.sizes = [];
 
 var addEngine = function( data ) {
-  var radius = Math.PI * data.diameter / 2 * data.height * 0.1;
+  var radius = Math.PI * data.diameter / 2 * data.height;
   radius = Math.pow( radius, 0.5 ) * 10;
-  console.log(
-    Math.PI * data.diameter / 2 * data.height,
-    radius
-  );
-  window.data.datasets.push({
+
+  var bdw = Math.pow( Math.max( data.cost / 1000, 0.5 ), 0.5 );
+
+  var twr = data.thrust / ( data.weight * 9.807 );
+
+  if ( radius > 100 ) {
+    radius = radius / 10;
+    bdw = bdw / 10;
+    dataset = window.data0;
+  } else if ( radius > 10 ) {
+    radius = radius / 5;
+    bdw = bdw / 5;
+    dataset = window.data1;
+    console.log( data );
+  } else {
+    radius = radius;
+    bdw = bdw;
+    dataset = window.data2;
+  }
+
+  dataset.datasets.push({
     label: data.label,
     data: [{
-      x: data.thrust / data.weight * xadj,
-      y: data.thrust * yadj,
+      x: twr,
+      y: data.thrust,
       r: radius,
     }],
     backgroundColor: data.color,
     borderColor: 'black',
-    borderWidth: Math.pow( Math.max( data.cost / 100000, 0.5 ), 0.5 ),
+    borderWidth: bdw,
   });
 }
 
@@ -59,16 +124,9 @@ var options = {
   layout: {
     padding: 10,
   },
-  title: {
-    display: true,
-    fontSize: 32,
-    padding: 20,
-    text: "CoaDE Engine Plot",
-  },
   scales: {
     xAxes: [{
       ticks: {
-        max: 4000,
         callback: function( value ) {
           return value + ' g0 ';
         }
@@ -77,12 +135,13 @@ var options = {
     yAxes: [{
       type: 'logarithmic',
       ticks: {
-        min: 500,
         callback: function( value ) {
-          if ( value < 9900 ) {
-            return value + ' KN';
+          if ( value < 99 ) {
+            return Math.floor( value * 1000 ) + ' N';
+          } else if ( value < 9900 ) {
+            return Math.floor( value ) + ' KN';
           } else {
-            return value / 1000 + ' MN';
+            return Math.floor( value / 1000 ) + ' MN';
           }
         }
       }
@@ -90,9 +149,19 @@ var options = {
   },
 };
 
-var myBubbleChart = new Chart(ctx,{
+var myBubbleChart = new Chart(document.getElementById("engineChart0"),{
     type: 'bubble',
-    data: data,
+    data: data0,
+    options: options
+});
+var myBubbleChart = new Chart(document.getElementById("engineChart1"),{
+    type: 'bubble',
+    data: data1,
+    options: options
+});
+var myBubbleChart = new Chart(document.getElementById("engineChart2"),{
+    type: 'bubble',
+    data: data2,
     options: options
 });
   </script>
