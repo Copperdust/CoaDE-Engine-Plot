@@ -13,5 +13,7 @@ Template for new engines:
     weight: 15000, // Mass of the engine in kg (not tonnes)
     diameter: 14.5, // Diameter in meters (first/second number in the editor)
     height: 14.1, // Height in meters (third number in the editor)
+    link: 'https://www.google.com', // Link to code or screenshot. Use pastebin or similar for code. Will implement soon.
+    /* code: 'CODE HERE' // Maybe in the future I'll implement adding the code here for easy pasting on clicking on the engine? Feel free to use this field, but it's totally unimplemented and completely optional /*
   },
 ```
