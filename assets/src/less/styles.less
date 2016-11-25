@@ -1,16 +1,37 @@
-.mjx-chtml{
+.mjx-chtml {
   font-size: 22px !important;
 }
-.equations-container{
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
+
+.equations-container {
   display: flex;
+  > span {
+    padding: 10px;
+    border: 3px double black;
+    margin: 10px;
+    border-radius: 1px;
+  }
 }
-.equations-container > span {
-  padding: 10px;
-  border: 3px double black;
-  margin: 10px;
-  border-radius: 1px;
+
+.legend-container {
+  .legend {
+    margin: 5px;
+    display: block;
+    & > * {
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .text {
+      margin: 5px;
+      font-size: 12px;
+    }
+    .border{
+      margin-right: 5px;
+      height: 20px;
+      background-color: black;
+    }
+    .color {
+      width: 40px;
+      height: 20px;
+    }
+  }
 }

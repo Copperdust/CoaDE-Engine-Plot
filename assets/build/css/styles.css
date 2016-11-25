@@ -2,9 +2,6 @@
   font-size: 22px !important;
 }
 .equations-container {
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -13,4 +10,25 @@
   border: 3px double black;
   margin: 10px;
   border-radius: 1px;
+}
+.legend-container .legend {
+  margin: 5px;
+  display: block;
+}
+.legend-container .legend > * {
+  vertical-align: middle;
+  display: inline-block;
+}
+.legend-container .legend .text {
+  margin: 5px;
+  font-size: 12px;
+}
+.legend-container .legend .border {
+  margin-right: 5px;
+  height: 20px;
+  background-color: black;
+}
+.legend-container .legend .color {
+  width: 40px;
+  height: 20px;
 }
