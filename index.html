@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js" integrity="sha256-1qeNeAAFNi/g6PFChfXQfa6CQ8eXoHXreohinZsoJOQ=" crossorigin="anonymous"></script>
+  <script src="./rcolor.js"></script>
+  <script src="./engines.js"></script>
+  <title>Engine Plot</title>
+</head>
+<style type="text/css">
+
+</style>
+<body>
+  <canvas id="engineChart" width="400" height="400"></canvas>
+  <script>
+
+var ctx = document.getElementById("engineChart");
+
+var color = new RColor;
+var radj = 0.1; // Volume, in m3
+var xadj = 0.000001; // Thrust, in MegaNewtons
+var yadj = 0.001; // Weight, in Tonnes
+
+var data = {datasets: [
+  ]};
+
+for (var i = engines.length - 1; i >= 0; i--) {
+  var curr = engines[i];
+  if ( typeof curr.color != undefined ) curr.color = color.get(true);
+  var engine = {
+    label: curr.label,
+    data: [{
+      x: curr.thrust * xadj,
+      y: curr.weight * yadj,
+      r: Math.PI * curr.diameter / 2 * curr.height * radj
+    }],
+    backgroundColor: curr.color
+  };
+  data.datasets.push( engine );
+}
+
+var options = {
+  layout: {
+    padding: 10,
+  },
+  title: {
+    display: true,
+    fontSize: 32,
+    padding: 20,
+    text: "CoaDE Engine Plot",
+  },
+};
+
+var myBubbleChart = new Chart(ctx,{
+    type: 'bubble',
+    data: data,
+    options: options
+});
+  </script>
+</body>
+</html>
