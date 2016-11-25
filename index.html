@@ -1,38 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- These is our main stylesheet -->
+  <link rel="stylesheet/less" type="text/css" src="./styles.less" />
+  <!-- This script takes care of compiling the less stylesheet on the browser -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.1/less.min.js"></script>
+
   <!-- This script takes care of rendering the chart -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js" integrity="sha256-1qeNeAAFNi/g6PFChfXQfa6CQ8eXoHXreohinZsoJOQ=" crossorigin="anonymous"></script>
 
   <!-- This script takes care of allowing us to write math stuffs -->
-  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   <!-- This script allows us to get a random color with ease -->
   <script src="./rcolor.js"></script>
+
+  <!-- Latest jQuery 2016-11-25 -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
   <!-- These are our own scripts, which allow us to organize our project and improve readability and maintainability -->
   <script src="./engines.js"></script> <!-- JSON for custom engines -->
   <script src="./stockEngines.js"></script> <!-- JSON for stock engines -->
   <title>NTR Engine Plot</title>
 </head>
-<style type="text/css">
-  .mjx-chtml{
-    font-size: 22px !important;
-  }
-  .equations-container{
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
-  }
-  .equations-container > span {
-    padding: 10px;
-    border: 3px double black;
-    margin: 10px;
-    border-radius: 1px;
-  }
-</style>
 <body>
   <div class="data-container">
     <h2>Big Engines</h2>
