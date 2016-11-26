@@ -8,7 +8,7 @@ engines = [
     weight: 15000,
     diameter: 14.5,
     height: 14.1,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/X7k6JCt',
   },
   {
     label: '5.30 km/s Decane NTR - Black II',
@@ -19,7 +19,7 @@ engines = [
     weight: 158,
     diameter: 1.84,
     height: 4.99,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/MHdzPAm',
   },
   {
     label: '5.06 km/s Methane NTR - Dark I',
@@ -30,7 +30,7 @@ engines = [
     weight: 32000,
     diameter: 18.2,
     height: 12.1,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/7TkoFr8',
   },
   {
     label: '6.00 km/s Methane NTR - Dark II',
@@ -41,7 +41,7 @@ engines = [
     weight: 934,
     diameter: 9.82,
     height: 5.49,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/hLQ6HTY',
   },
   {
     label: '6.21 km/s Methane NTR - Dark III',
@@ -52,7 +52,7 @@ engines = [
     weight: 112000,
     diameter: 16.7,
     height: 35.1,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/ts1YCRs',
   },
   {
     label: '8.43 km/s Hydrogen Deuteride NTR - Obscure I',
@@ -63,7 +63,7 @@ engines = [
     weight: 1760,
     diameter: 1.29,
     height: 1.81,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/dACJ0ur',
   },
   {
     label: '8.54 km/s Hydrogen Deuteride NTR - Obscure II',
@@ -74,7 +74,7 @@ engines = [
     weight: 9.51,
     diameter: 0.601,
     height: 0.749,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/xn5rj2N',
   },
   {
     label: '8.70 km/s Hydrogen Deuteride NTR - Obscure III',
@@ -85,7 +85,7 @@ engines = [
     weight: 105000,
     diameter: 18.8,
     height: 20.8,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/rHfBEzo',
   },
   {
     label: '8.90 km/s Hydrogen NTR - Shadow I',
@@ -96,7 +96,7 @@ engines = [
     weight: 29500,
     diameter: 9.41,
     height: 11.6,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/eaYwMye',
   },
   {
     label: '8.90 km/s Hydrogen Deuteride NTR - Obscure IV',
@@ -107,7 +107,7 @@ engines = [
     weight: 17400,
     diameter: 6.49,
     height: 9.6,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/bQPGrJ6',
   },
   {
     label: '9.00 km/s Hydrogen Deuteride NTR - Obscure V',
@@ -118,6 +118,6 @@ engines = [
     weight: 1.26,
     diameter: 0.113,
     height: 0.345,
-    link: 'https://imgur.com/a/S1lKV',
+    link: 'http://imgur.com/lU5NwmZ',
   },
 ];
