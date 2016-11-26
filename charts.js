@@ -31,6 +31,7 @@ addEngine = function( data ) {
     backgroundColor: data.color,
     borderColor: 'black',
     borderWidth: bdw,
+    raw: data,
   });
 }
 
@@ -84,10 +85,40 @@ chartOptions = {
       }
     }]
   },
+  tooltips: {
+    callbacks: {
+      title: function( obj, data ) {
+        // console.log( obj );
+        // console.log( data );
+      },
+    },
+  },
   legend: {
     display: false,
     generateLabels: function(chart) {
     }
+  },
+};
+
+var onClick = function( ev, el, index ) {
+  if ( !el.length ) return;
+  if ( typeof data0.datasets[el[0]._datasetIndex].raw.link != "undefined" ) {
+    window.open( data0.datasets[el[0]._datasetIndex].raw.link, "_blank" );
+  }
+}
+var engine0Click = {
+  onClick: function( ev, el ) {
+    onClick( ev, el, 0 );
+  }
+};
+var engine1Click = {
+  onClick: function( ev, el ) {
+    onClick( ev, el, 1 );
+  }
+};
+var engine2Click = {
+  onClick: function( ev, el ) {
+    onClick( ev, el, 2 );
   }
 };
 
@@ -95,15 +126,15 @@ chartOptions = {
 var myBubbleChart = new Chart(document.getElementById("engineChart0"),{
     type: 'bubble',
     data: data0,
-    options: chartOptions
+    options: Object.assign( {}, chartOptions, engine0Click ),
 });
 var myBubbleChart = new Chart(document.getElementById("engineChart1"),{
     type: 'bubble',
     data: data1,
-    options: chartOptions
+    options: Object.assign( {}, chartOptions, engine1Click ),
 });
 var myBubbleChart = new Chart(document.getElementById("engineChart2"),{
     type: 'bubble',
     data: data2,
-    options: chartOptions
+    options: Object.assign( {}, chartOptions, engine2Click ),
 });
