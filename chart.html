@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Resources -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <title>Reactor Heat Graph</title>
+</head>
+<!-- Styles -->
+<style>
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+</style>
+<body>
+    <!-- HTML -->
+    <div id="chartdiv"></div>
+
+    <!-- Chart code -->
+    <script>
+    var chart = AmCharts.makeChart("chartdiv", {
+        "type": "serial",
+        "theme": "light",
+        "legend": {
+            "horizontalGap": 10,
+            "maxColumns": 1,
+            "position": "right",
+            "markerSize": 16,
+            "fontSize": 18,
+        },
+        "dataProvider": [{
+            "Temperature":        "2700",
+            "Reactor Mass":       "252.6",
+            "Hull Cross Section": "346.5",
+            "Heat Signature":     "194.3",
+            "Reactor Cost":       "334.6",
+            "Total Mass":         "168.5",
+            "Total Area":         "136.6",
+            "Total Cost":         "214.5"
+        },{
+            "Temperature":        "2600",
+            "Reactor Mass":       "158.8",
+            "Hull Cross Section": "170.3",
+            "Heat Signature":     "134.2",
+            "Reactor Cost":       "173.3",
+            "Total Mass":         "120.1",
+            "Total Area":         "109.6",
+            "Total Cost":         "131.3"
+        },{
+            "Temperature":        "2500",
+            "Reactor Mass":       "117.2",
+            "Hull Cross Section": "104.3",
+            "Heat Signature":     "105.0",
+            "Reactor Cost":       "111.9",
+            "Total Mass":         "100.0",
+            "Total Area":         "100.0",
+            "Total Cost":         "100.0"
+        },{
+            "Temperature":        "2400",
+            "Reactor Mass":       "100.0",
+            "Hull Cross Section": "100.0",
+            "Heat Signature":     "100.0",
+            "Reactor Cost":       "100.0",
+            "Total Mass":         "101.3",
+            "Total Area":         "112.3",
+            "Total Cost":         "101.3"
+        },{
+            "Temperature":        "2300",
+            "Reactor Mass":       "71.7",
+            "Hull Cross Section": "103.6",
+            "Heat Signature":     "96.7",
+            "Reactor Cost":       "98.5",
+            "Total Mass":         "101.1",
+            "Total Area":         "128.5",
+            "Total Cost":         "109.1"
+        },{
+            "Temperature":        "2200",
+            "Reactor Mass":       "69.5",
+            "Hull Cross Section": "100.7",
+            "Heat Signature":     "93.3",
+            "Reactor Cost":       "93.3",
+            "Total Mass":         "111.8",
+            "Total Area":         "147.9",
+            "Total Cost":         "117.0"
+        },{
+            "Temperature":        "2100",
+            "Reactor Mass":       "56.6",
+            "Hull Cross Section": "103.6",
+            "Heat Signature":     "90.0",
+            "Reactor Cost":       "95.2",
+            "Total Mass":         "121.9",
+            "Total Area":         "172.6",
+            "Total Cost":         "130.6"
+        }],
+        "graphs": [{
+            "valueField": "Reactor Mass",
+            "title": "Reactor Mass",
+            "type": "line",
+            "bullet": "round",
+            "bulletSize": 12,
+            "bulletAlpha": 0.8,
+            "lineAlpha": 0.8,
+            "lineThickness": 8,
+        },{
+            "valueField": "Hull Cross Section",
+            "title": "Hull Cross Section",
+            "type": "line",
+            "bullet": "round",
+            "bulletSize": 12,
+            "bulletAlpha": 0.8,
+            "lineAlpha": 0.8,
+            "lineThickness": 8,
+        },{
+            "valueField": "Heat Signature",
+            "title": "Heat Signature",
+            "type": "line",
+            "bullet": "round",
+            "bulletSize": 12,
+            "bulletAlpha": 0.8,
+            "lineAlpha": 0.8,
+            "lineThickness": 8,
+        },{
+            "valueField": "Reactor Cost",
+            "title": "Reactor Cost",
+            "type": "line",
+            "bullet": "round",
+            "bulletSize": 12,
+            "bulletAlpha": 0.8,
+            "lineAlpha": 0.8,
+            "lineThickness": 8,
+        },{
+            "valueField": "Total Mass",
+            "title": "Total Mass",
+            "type": "line",
+            "bullet": "round",
+            "bulletSize": 12,
+            "bulletAlpha": 0.8,
+            "lineAlpha": 0.8,
+            "lineThickness": 8,
+        },{
+            "valueField": "Total Area",
+            "title": "Total Area",
+            "type": "line",
+            "bullet": "round",
+            "bulletSize": 12,
+            "bulletAlpha": 0.8,
+            "lineAlpha": 0.8,
+            "lineThickness": 8,
+        },{
+            "valueField": "Total Cost",
+            "title": "Total Cost",
+            "type": "line",
+            "bullet": "round",
+            "bulletSize": 12,
+            "bulletAlpha": 0.8,
+            "lineAlpha": 0.8,
+            "lineThickness": 8,
+        }],
+        "categoryField": "Temperature",
+        "valueAxes": [
+          {
+            "fontSize": 18,
+          }
+        ],
+        "categoryAxis": {
+          "fontSize": 18,
+        },
+        "export": {
+          "enabled": true
+         }
+
+    });
+    </script>
+</body>
+</html>
