@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- These is our main stylesheet -->
+  <link rel="stylesheet" type="text/css" href="./assets/build/css/styles.css">
+
+  <!-- This script takes care of rendering the chart -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js" integrity="sha256-1qeNeAAFNi/g6PFChfXQfa6CQ8eXoHXreohinZsoJOQ=" crossorigin="anonymous"></script> -->
+
+  <!-- This script takes care of allowing us to write math stuffs -->
+  <!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+  <!-- This script allows us to get a random color with ease -->
+  <!-- <script src="./rcolor.js"></script> -->
+
+  <!-- Latest jQuery 2016-11-25 -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+  <!-- These are our own scripts, which allow us to organize our project and improve readability and maintainability -->
+  <script src="./engines.js"></script>
+  <script src="./stockEngines.js"></script>
+  <title>NTR Engine Plot</title>
+
+  <!-- Resources -->
+  <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+  <script src="https://www.amcharts.com/lib/3/xy.js"></script>
+  <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+  <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+  <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+</head>
+<body>
+  <!-- Styles -->
+  <style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  #chartdiv {
+    width: 100vw;
+    height: 100vh;
+  }
+  </style>
+
+
+  <!-- Chart code -->
+  <script>
+  // Prepare engines data
+  var allEngines = engines.concat(stockEngines);
+  $.each( allEngines, function( k, v ) {
+    v.twr = v.thrust / ( v.weight * 9.807 );
+    v.vol = Math.PI * v.diameter / 2 * v.height;
+  });
+  var enginesPerPropellant = {};
+  $.each( allEngines, function( k, v ) {
+    if ( typeof enginesPerPropellant[ v.propellant ] == "undefined" )
+      enginesPerPropellant[ v.propellant ] = [];
+    enginesPerPropellant[ v.propellant ].push( v );
+  });
+  var data = [];
+  var index = 0;
+  var maxSubInd = 0;
+  while ( Object.keys( enginesPerPropellant).length ) {
+    data[ index ] = {};
+    var subIndex = 0;
+    $.each( enginesPerPropellant, function( k0, v0 ) {
+      if ( maxSubInd < subIndex ) maxSubInd = subIndex;
+      $.each( v0.shift(), function( k1, v1 ) {
+        data[ index ][ k1+subIndex ] = v1;
+      })
+      if ( !v0.length ) {
+        delete enginesPerPropellant[ k0 ];
+      }
+      subIndex++;
+    });
+    index++;
+    if ( index > 100 ) break;
+  }
+
+  console.log( data );
+
+  // Prepare graphs
+  var graphs = [];
+  var baseGraph = {
+    "bullet": "circle",
+    "bulletBorderAlpha": 0.8,
+    "bulletAlpha": 0.2,
+    "lineAlpha": 0,
+    "fillAlphas": 0,
+    "maxBulletSize": 100,
+    "balloonFunction": function( data ) {
+      // Identify which subIndex we're talking about
+      var i = 0;
+      while ( data.dataContext[ 'twr'+i ] != data.values.y ) {
+        i++;
+        if ( i > 1000 ) {
+          console.log( "break!!!" );
+          break;
+        }
+      }
+      // Now build a table with all the information
+      var html =
+        "<table><tr>"+
+        "<tr><th>Name</th><td>"+data.dataContext[ 'label'+i ]+"</td></tr>"+
+        "<tr><th>Propellant</th><td>"+data.dataContext[ 'propellant'+i ]+"</td></tr>"+
+        "<tr><th>Author</th><td>"+data.dataContext[ 'author'+i ]+"</td></tr>"+
+        "<tr><th>Thrust</th><td>"+data.dataContext[ 'thrust'+i ]+"</td></tr>"+
+        "<tr><th>Cost</th><td>"+data.dataContext[ 'cost'+i ]+"</td></tr>"+
+        "<tr><th>Gimbal</th><td>"+data.dataContext[ 'gimbal'+i ]+"</td></tr>"+
+        "<tr><th>Weight</th><td>"+data.dataContext[ 'weight'+i ]+"</td></tr>"+
+        "<tr><th>Diameter</th><td>"+data.dataContext[ 'diameter'+i ]+"</td></tr>"+
+        "<tr><th>Height</th><td>"+data.dataContext[ 'height'+i ]+"</td></tr>"+
+        "</tr></table>";
+      // If it's a stock design, make it very visually obvious
+      if ( data.dataContext[ 'stock'+i ] ) {
+        html += "<h3 style='text-align:center;'>(This is a Stock Design)</h3>";
+      }
+      // Return html
+      return html;
+    },
+  }
+  g = 0;
+  for (var i = 0; i < maxSubInd; i++) {
+    g             = $.extend(true,{},baseGraph);
+    g.valueField  = "vol"+i;
+    g.xField      = "thrust"+i;
+    g.yField      = "twr"+i;
+    console.log( g.propellant );
+    graphs.push( g );
+  }
+
+  var chart = AmCharts.makeChart( "chartdiv", {
+    "type": "xy",
+    "theme": "light",
+    "dataProvider": data,
+    "balloon": {
+      "animationDuration": 0,
+      "fadeOutDuration": 0.1,
+      "maxWidth": 300,
+      "textAlign": "left",
+      "pointerWidth": 0,
+      "adjustBorderColor": false,
+      "borderAlpha": 0,
+      "shadowAlpha": 0,
+      "fillAlpha": 0.8,
+      "color": "#FFFFFF",
+    },
+    "valueAxes": [
+    // Bottom is Thrust Power
+      {
+        "position": "bottom",
+        "minimum": 100,
+        "minMaxMultiplier": 2,
+        "logarithmic": true,
+        "autoGridCount": false,
+        "minorGridEnabled": true,
+        "gridCount": 10,
+        "gridAlpha": 0.3,
+        "gridThickness": 1,
+        "labelFunction": function( number ) {
+          if ( number < 1000 ) {
+            number = number;
+            mult = "";
+          } else if ( number < 1000000 ) {
+            number = number/1000;
+            mult = "K";
+          } else if ( number < 1000000000 ) {
+            number = number/1000000;
+            mult = "M";
+          } else {
+            number = number/1000000000;
+            mult = "G";
+          }
+          return number + mult + "N";
+        }
+      },
+      // Left is Engine Size
+      {
+        "position": "left",
+        "minimum": 1,
+        "minMaxMultiplier": 2,
+        "logarithmic": true,
+        "autoGridCount": false,
+        "minorGridEnabled": true,
+        "gridCount": 10,
+        "gridAlpha": 0.3,
+        "gridThickness": 1,
+        "labelFunction": function( number ) {
+          if ( number < 1000 ) {
+            number = number;
+            mult = "";
+          } else if ( number < 1000000 ) {
+            number = number/1000;
+            mult = "K";
+          } else if ( number < 1000000000 ) {
+            number = number/1000000;
+            mult = "M";
+          } else {
+            number = number/1000000000;
+            mult = "G";
+          }
+          return number + mult + "g₀";
+        }
+      }
+    ],
+    "graphs": graphs,
+    "marginTop": 100,
+  } );
+  </script>
+
+  <!-- HTML -->
+  <div id="chartdiv"></div>
+</body>
+</html>
