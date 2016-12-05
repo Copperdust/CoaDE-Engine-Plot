@@ -1,0 +1,215 @@
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+<!-- Styles -->
+<style>
+#chartdiv {
+  width   : 100%;
+  height    : 95vh;
+  font-size : 11px;
+}
+</style>
+
+<!-- Resources -->
+<script src="./assets/js/amcharts/amcharts.js"></script>
+<script src="./assets/js/amcharts/serial.js"></script>
+<script src="./assets/js/amcharts/plugins/export/export.min.js"></script>
+<script src="./assets/js/amcharts/themes/light.js"></script>
+<script src="./assets/js/amcharts/plugins/dataloader/dataloader.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="./radiation_shielding.js"></script>
+
+<!-- Chart code -->
+<script>
+var chart = AmCharts.makeChart("chartdiv", {
+  "type": "serial",
+  "theme": "light",
+  "categoryField": "Material",
+  "rotate": true,
+  "addClassNames": true,
+  "columnSpacing": 0,
+  "columnWidth": 0.8,
+  "categoryAxis": {
+    "gridPosition": "start",
+    "position": "left"
+  },
+  "trendLines": [],
+  "graphs": [
+    {
+      "fillAlphas": 0.8,
+      "id": "Melting Point",
+      "lineAlpha": 0.2,
+      "title": "Melting Point",
+      "type": "column",
+      "valueField": "Melting Point",
+      "valueAxis": "heat",
+      "lineColor": "#F12923",
+      "labelText": "[[value]]°K",
+      "labelPosition": "inside",
+    },
+    {
+      "fillAlphas": 0.8,
+      "id": "Thickness for 3uW",
+      "lineAlpha": 0.2,
+      "title": "Thickness for 3uW",
+      "type": "column",
+      "valueField": "Thickness for 3uW",
+      "valueAxis": "length",
+      "lineColor": "#34B4E8",
+      "labelText": "[[value]] m",
+      "labelPosition": "inside",
+    },
+    {
+      "fillAlphas": 0.8,
+      "id": "Neutron Reflector Cost",
+      "lineAlpha": 0.2,
+      "title": "Neutron Reflector Cost",
+      "type": "column",
+      "valueField": "Neutron Reflector Cost",
+      "valueAxis": "cost",
+      "lineColor": "#3CA53A",
+      "labelText": "[[value]] c",
+      "labelPosition": "inside",
+    },
+    {
+      "fillAlphas": 0.8,
+      "id": "Neutron Reflector Weight",
+      "lineAlpha": 0.2,
+      "title": "Neutron Reflector Weight",
+      "type": "column",
+      "valueField": "Neutron Reflector Weight",
+      "valueAxis": "weight",
+      "lineColor": "#FF8600",
+      "labelText": "[[value]] kg",
+      "labelPosition": "inside",
+    },
+  ],
+  "valueAxes": [
+    {
+      "unit": "°K",
+      "id": "heat",
+      "position": "bottom",
+      "offset": 0,
+      "gridAlpha": "0.3",
+      "color": "#F12923",
+      "lineColor": "#F12923",
+      "fillColor": "#F12923",
+      "axisColor": "#F12923",
+      "gridColor": "#F12923",
+    },
+    {
+      "unit": "m",
+      "id": "length",
+      "position": "bottom",
+      "offset": 50,
+      "gridAlpha": "0.3",
+      "color": "#34B4E8",
+      "lineColor": "#34B4E8",
+      "fillColor": "#34B4E8",
+      "axisColor": "#34B4E8",
+      "gridColor": "#34B4E8",
+    },
+    {
+      "unit": "c",
+      "id": "cost",
+      "position": "bottom",
+      "offset": 100,
+      "gridAlpha": "0.3",
+      "color": "#3CA53A",
+      "lineColor": "#3CA53A",
+      "fillColor": "#3CA53A",
+      "axisColor": "#3CA53A",
+      "gridColor": "#3CA53A",
+    },
+    {
+      "unit": "kg",
+      "id": "weight",
+      "position": "bottom",
+      "offset": 150,
+      "gridAlpha": "0.3",
+      "color": "#FF8600",
+      "lineColor": "#FF8600",
+      "fillColor": "#FF8600",
+      "axisColor": "#FF8600",
+      "gridColor": "#FF8600",
+    },
+  ],
+  // "dataLoader": {
+  //   "url": "./data/RadiationShielding3uW.csv",
+  //   "format": "csv",
+  // },
+  "dataProvider": [
+    {
+      "Material": "Lithium-6",
+      "Melting Point": "454",
+      "Thickness for 3uW": "0.0258",
+      "Total Cost": "103000",
+      "Reactor Cost": "97300",
+      "Neutron Reflector Cost": "5700",
+      "Total Weight": "6240",
+      "Reactor Weight": "6080",
+      "Neutron Reflector Weight": "160"
+    },
+    {
+      "Material": "Boron Carbide",
+      "Melting Point": "3036",
+      "Thickness for 3uW": "0.3725",
+      "Total Cost": "582000",
+      "Reactor Cost": "97300",
+      "Neutron Reflector Cost": "484700",
+      "Total Weight": "16600",
+      "Reactor Weight": "6080",
+      "Neutron Reflector Weight": "10520"
+    },
+    {
+      "Material": "Boron",
+      "Melting Point": "2349",
+      "Thickness for 3uW": "0.3966",
+      "Total Cost": "258000",
+      "Reactor Cost": "97300",
+      "Neutron Reflector Cost": "160700",
+      "Total Weight": "15300",
+      "Reactor Weight": "6080",
+      "Neutron Reflector Weight": "9220"
+    },
+    {
+      "Material": "Diamond",
+      "Melting Point": "3823",
+      "Thickness for 3uW": "0.5287",
+      "Total Cost": "553000",
+      "Reactor Cost": "97300",
+      "Neutron Reflector Cost": "455700",
+      "Total Weight": "27000",
+      "Reactor Weight": "6080",
+      "Neutron Reflector Weight": "20920"
+    },
+    {
+      "Material": "Titanium Diboride",
+      "Melting Point": "3500",
+      "Thickness for 3uW": "0.5866",
+      "Total Cost": "1150000",
+      "Reactor Cost": "97300",
+      "Neutron Reflector Cost": "1052700",
+      "Total Weight": "35800",
+      "Reactor Weight": "6080",
+      "Neutron Reflector Weight": "29720"
+    },
+    {
+      "Material": "Boron Nitride",
+      "Melting Point": "3246",
+      "Thickness for 3uW": "0.6377",
+      "Total Cost": "413000",
+      "Reactor Cost": "97300",
+      "Neutron Reflector Cost": "315700",
+      "Total Weight": "21100",
+      "Reactor Weight": "6080",
+      "Neutron Reflector Weight": "15020"
+    }
+  ],
+  "export": {
+    "enabled": true
+  },
+});
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
