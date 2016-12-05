@@ -1,6 +1,7 @@
 engines = [
   {
     label: '5.06 km/s Decane NTR - Black I',
+    propellant: 'Decane',
     author: "Tessfield",
     thrust: 17400000,
     cost: 209000,
@@ -12,6 +13,7 @@ engines = [
   },
   {
     label: '5.30 km/s Decane NTR - Black II',
+    propellant: 'Decane',
     author: "Tessfield",
     thrust: 613000,
     cost: 2410,
@@ -23,6 +25,7 @@ engines = [
   },
   {
     label: '5.06 km/s Methane NTR - Dark I',
+    propellant: 'Methane',
     author: "Tessfield",
     thrust: 39600000,
     cost: 486000,
@@ -34,6 +37,7 @@ engines = [
   },
   {
     label: '6.00 km/s Methane NTR - Dark II',
+    propellant: 'Methane',
     author: "Tessfield",
     thrust: 2730000,
     cost: 36700,
@@ -45,6 +49,7 @@ engines = [
   },
   {
     label: '6.21 km/s Methane NTR - Dark III',
+    propellant: 'Methane',
     author: "Tessfield",
     thrust: 79600000,
     cost: 3140000,
@@ -56,6 +61,7 @@ engines = [
   },
   {
     label: '8.43 km/s Hydrogen Deuteride NTR - Obscure I',
+    propellant: 'Hydrogen Deuteride',
     author: "Tessfield",
     thrust: 2390000,
     cost: 58800,
@@ -67,6 +73,7 @@ engines = [
   },
   {
     label: '8.54 km/s Hydrogen Deuteride NTR - Obscure II',
+    propellant: 'Hydrogen Deuteride',
     author: "Tessfield",
     thrust: 108000,
     cost: 439,
@@ -78,6 +85,7 @@ engines = [
   },
   {
     label: '8.70 km/s Hydrogen Deuteride NTR - Obscure III',
+    propellant: 'Hydrogen Deuteride',
     author: "Tessfield",
     thrust: 35200000,
     cost: 3310000,
@@ -89,6 +97,7 @@ engines = [
   },
   {
     label: '8.90 km/s Hydrogen NTR - Shadow I',
+    propellant: 'Hydrogen',
     author: "Tessfield",
     thrust: 26600000,
     cost: 1190000,
@@ -100,6 +109,7 @@ engines = [
   },
   {
     label: '8.90 km/s Hydrogen Deuteride NTR - Obscure IV',
+    propellant: 'Hydrogen Deuteride',
     author: "Tessfield",
     thrust: 10600000,
     cost: 661000,
@@ -111,6 +121,7 @@ engines = [
   },
   {
     label: '9.00 km/s Hydrogen Deuteride NTR - Obscure V',
+    propellant: 'Hydrogen Deuteride',
     author: "Tessfield",
     thrust: 864,
     cost: 62.3,
@@ -122,6 +133,7 @@ engines = [
   },
   {
     label: 'Simien-Decane/I NTR-5300/5270XE',
+    propellant: 'Decane',
     author: "Deskjetser",
     thrust: 5270000,
     cost: 30200,
@@ -133,6 +145,7 @@ engines = [
   },
   {
     label: 'Magna-Luther-Decane/I NTR-5270/32500XA',
+    propellant: 'Decane',
     author: "Deskjetser",
     thrust: 32500000,
     cost: 537000,
@@ -144,6 +157,7 @@ engines = [
   },
   {
     label: 'Magna-Luther-Decane/II NTR-4600/51300XA',
+    propellant: 'Decane',
     author: "Deskjetser",
     thrust: 51300000,
     cost: 769000,
