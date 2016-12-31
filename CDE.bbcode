@@ -165,6 +165,10 @@ Below is a list of useful materials for turbopumps:
 [/tr]
 [/table]
 
+In order to find the optimal ratio for a turbopump for your own specific reactor, you'll have to inch the size of the pump up (if starting with a small pump radius) or down (if starting with a large pump radius), then the rpm adjusted until you get the results you want (e.g. efficiency, weight, cost, watch whatever you want to optimize against) and/or you get rid of the warnings.
+
+You can do this with a few different sizes, and you'll find there's a most efficient/sweet spot. If sizing up makes things worse size down or vice versa, at some point the improvements get reversed, and that's where the sweetspot is.
+
 [h2]
 [font size="5"]Injectors[/font]
 [/h2]
@@ -716,6 +720,24 @@ Some number crunching by @amimai
 
 [h2]
 [font size=5]Reactors[/font]
+[/h2]
+
+With enough fiddling you can get close to 10MW (60MW total heat) out of 100 grams of U-233 dioxide at 97% enrichment. So every value below that is going to be some lower enrichment value of 100 grams U-233 dioxide.
+
+To be min-maxed for cost, use the lowest possible enrichment value, with the highest possible neutron flux to generate enough heat to leech the amount of power you want.
+
+So if you want ~1MW at 2400K you need ~6.06MW waste heat. You calculate that by taking the power you want and dividing that by the max thermocoupler efficiency rating for your outlet (16.5% for 2400k so 1/.165 = ~6.06).
+
+Max sustainable Neutron Flux is a little more tricky so I just kind of eyeball it based off previous reactor results for neturon flux stability (avoiding the reactor burning through fuel too fast error is the real pain).
+
+After you get your reactor outputting the correct amount of waste heat you just need to make it not melt with turbopumps and a large enough thermocoupler. To be the highest efficiency possible you want it to be right on the brink of melt down, and thermocoupler yield strength. If you find yourself more meltdown prone than yield strength prone, reduce the size of the thermocoupler (or vice versa).
+
+[font size=1](credit @jasonvance)[/font]
+
+See Turbopumps above for advice on how to find the best size/rpm ratio.
+
+[h2]
+[font size=4]Modules[/font]
 [/h2]
 
 [table]
@@ -1465,6 +1487,8 @@ On the other hand, if you DO want to bother with Neutron Reflectors, use [b]Boro
 Anything else is not really comparable. Have a graph, graphs are cool!
 
 [img alt="" src="https://copperdust.github.io/CoaDE-Engine-Plot/data/radiation_shielding_3uW_chart.svg" style="max-width:100%;"]
+
+If you want to minimize radiation generation on a reactor, use a skinny reactor design. [font size=1](credit @jasonvance)[/font]
 
 [hr]
 
